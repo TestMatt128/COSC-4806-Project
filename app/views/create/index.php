@@ -11,11 +11,6 @@
 
     <div class="row">
         <div class="col-sm-auto">
-            <?php if (!empty($data['message'])): ?>
-                <div class="alert alert-danger">
-                    <?= htmlspecialchars($data['message']); ?>
-                </div>
-            <?php endif; ?>
 
             <form action="/signup/create" method="post">
                 <fieldset>
