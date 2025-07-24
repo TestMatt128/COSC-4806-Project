@@ -25,7 +25,7 @@ class User {
          */
 		$username = strtolower($username);
 		$db = db_connect();
-        $stmt = $db->prepare("SELECT * FROM users WHERE username = :name");
+        $stmt = $db->prepare("select * from users where username = :name");
         $stmt->bindValue(':name', $username);
         $stmt->execute();
         $rows = $stmt->fetch(PDO::FETCH_ASSOC);
