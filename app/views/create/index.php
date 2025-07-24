@@ -12,7 +12,7 @@
     <div class="row">
         <div class="col-sm-auto">
 
-            <form action="/signup/create" method="post">
+            <form action="/create/signup" method="post">
                 <fieldset>
                     <div class="form-group">
                         <label for="username">Username</label>

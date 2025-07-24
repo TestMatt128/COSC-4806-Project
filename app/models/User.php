@@ -26,11 +26,11 @@ class User {
 		$username = strtolower($username);
 		$db = db_connect();
         $statement = $db->prepare("SELECT * FROM users WHERE username = :name");
-        $statement->bindValue(':username', $username);
+        $statement->bindValue(':name', $username);
         $statement->execute();
         $rows = $statement->fetch(PDO::FETCH_ASSOC);
 		
-		if ($rows && password_verify($password, $rows['password'])) {
+		if (password_verify($password, $rows['password'])) {
 			$_SESSION['auth'] = 1;
 			$_SESSION['username'] = ucwords($username);
       $_SESSION['user_id'] = $rows['id'];
@@ -43,8 +43,8 @@ class User {
 			} else {
 				$_SESSION['failedAuth'] = 1;
 			}
-			header('Location: /login');
-			die;
+			header('Location: /home');
+			exit;
 		  }
     }
     public function create($username, $password){
