@@ -30,7 +30,7 @@ class User {
         $statement->execute();
         $rows = $statement->fetch(PDO::FETCH_ASSOC);
 		
-		if (password_verify($password, $rows['password'])) {
+		if ($rows && password_verify($password, $rows['password'])) {
 			$_SESSION['auth'] = 1;
 			$_SESSION['username'] = ucwords($username);
       $_SESSION['user_id'] = $rows['id'];
