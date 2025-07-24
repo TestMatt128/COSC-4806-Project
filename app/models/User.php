@@ -45,7 +45,15 @@ class User {
 			}
 			header('Location: /login');
 			die;
-		}
+		  }
+    }
+    public function create($username, $password){
+        $username = strtolower($username);
+        $db = db_connect();
+        $statement = $db->prepare("INSERT INTO users (username, password) VALUES (:username, :password)");
+        $statement->bindValue(':username', $username);
+        $statement->bindValue(':password', password_hash($password, PASSWORD_DEFAULT));
+        return $statement->execute();
     }
 
 }
