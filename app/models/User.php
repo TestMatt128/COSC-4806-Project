@@ -43,11 +43,11 @@ class User {
 			} else {
 				$_SESSION['failedAuth'] = 1;
 			}
-			header('Location: /home');
+			header('Location: /login');
 			exit;
 		  }
     }
-    public function create($username, $password){
+    public function create ($username, $password){
         $username = strtolower($username);
         $db = db_connect();
         $statement = $db->prepare("INSERT INTO users (username, password) VALUES (:username, :password)");
