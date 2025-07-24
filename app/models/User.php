@@ -25,15 +25,15 @@ class User {
          */
 		$username = strtolower($username);
 		$db = db_connect();
-        $statement = $db->prepare("SELECT * FROM users WHERE username = :name");
-        $statement->bindValue(':name', $username);
-        $statement->execute();
-        $rows = $statement->fetch(PDO::FETCH_ASSOC);
+        $stmt = $db->prepare("SELECT * FROM users WHERE username = :name");
+        $stmt->bindValue(':name', $username);
+        $stmt->execute();
+        $rows = $stmt->fetch(PDO::FETCH_ASSOC);
 		
 		if ($rows && password_verify($password, $rows['password'])) {
 			$_SESSION['auth'] = 1;
 			$_SESSION['username'] = ucwords($username);
-      $_SESSION['user_id'] = $rows['id'];
+      
 			unset($_SESSION['failedAuth']);
 			header('Location: /home');
 			exit;
@@ -42,11 +42,13 @@ class User {
 				$_SESSION['failedAuth'] ++; //increment
 			} else {
 				$_SESSION['failedAuth'] = 1;
-			}
-			header('Location: /login');
+			   }
+      
+			header('Location: /home');
 			exit;
 		  }
     }
+  
     public function create ($username, $password){
         $username = strtolower($username);
         $db = db_connect();

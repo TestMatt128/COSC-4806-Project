@@ -7,11 +7,7 @@ class App {
     protected $special_url = ['apply'];
     protected $params = [];
 
-    public function __construct() {
-        if (isset($_SESSION['auth']) == 1) {
-            //$this->method = 'index';
-            $this->controller = 'home';
-        } 
+    public function __construct() {  
 
         // This will return a broken up URL
         // it will be /controller/method
