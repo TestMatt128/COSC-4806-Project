@@ -2,14 +2,15 @@
 
 class movie {
   public function index() {
-    header ("Location: /");
-    exit;
+    $this->view('movie/index');
   }
   public function search() {
-    if(isset($_GET['title']) || empty(trim($_GET['title']))) {
-      die("Please enter a movie title.");
+    if(!isset($_REQUEST['movie']){
+       // if search is empty, return to movie page.
+      die("Movie not found.");
+      header('Location: /movie');
     }
-
+  
     $title = urlencode(trim($_GET['title']));
     $api_key = $_ENV['omdb_key'];
     $queryurl = "http://www.omdbapi.com/?t=" . $title . "&apikey=" . $api_key;
@@ -24,6 +25,7 @@ class movie {
 
     require_once 'app/database.php';
     $db = db_connect();
+    
   }
 }
 
