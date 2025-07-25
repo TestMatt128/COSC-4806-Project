@@ -1,6 +1,10 @@
 <?php
 
 class movie {
+  public function index() {
+    header ("Location: /");
+    exit;
+  }
   public function search() {
     if(isset($_GET['title']) || empty(trim($_GET['title']))) {
       die("Please enter a movie title.");
