@@ -20,6 +20,12 @@ class omdb extends Controller {
     require_once 'app/database.php';
     $db = db_connect();
 
+    $statement = $db->prepare("SELECT AVERAGE(rating) as average FROM movieRatings WHERE movie = ?");
+    $statement->execute([$movie['Title']]);
+    $AVG = $statement->fetch(PDO::FETCH_ASSOC);
+    $average = $AVG['average'] ? number_format($AVG['average'], 1) : 'No ratings yet.';
+    
+
     echo "<pre>";
     print_r ($movie);
     die;
