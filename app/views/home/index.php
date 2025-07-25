@@ -49,16 +49,22 @@ body {
     <div class="page-header" id="banner">
         <div class="row">
             <div class="col-lg-12">
-                <h1>Hey</h1>
-                <p class="lead"> <?= date("F jS, Y"); ?></p>
+                <h1>Hello! Search up any movie you want to see reviews on.</h1>
             </div>
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-lg-12">
-            <p> <a href="/logout">Click here to logout</a></p>
-        </div>
-    </div>
+  <form action="/omdb/search" method="get" class="search-bar d-flex">
+   <div class="col-12 d-flex justify-content-center">"
+    <input 
+      type="text" 
+      name="title" 
+      class="form-control me-2"
+      placeholder="Search Movies" 
+      required
+    >
+   </div>
+    <button type="submit" class="btn">Search</button>
+  </form>
 
-    <?php require_once 'app/views/templates/footer.php' ?>
+<?php require_once 'app/views/templates/footer.php' ?>
