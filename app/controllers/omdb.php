@@ -2,6 +2,9 @@
 
 class omdb extends Controller {
   public function index() {
+
+  }
+  public function search(){ 
     if (isset($_GET['title']) || empty(trim($_GET['title']))){
       die('Please enter a movie title.');
     }
@@ -27,13 +30,15 @@ class omdb extends Controller {
     $average = $AVG['average'] ? number_format($AVG['average'], 1) : 'No ratings yet.';
 
     // Get all user ratings for the movie.
-    $statement = $db->prepare("SELECT username, rating FROM movieRatings WHERE movie = ?");
+    $statement = $db->prepare("SELECT username, rating, review FROM movieRatings WHERE movie = ?");
     $statement->execute([$movie['Title']]);
     $ratings = $statement->fetchAll(PDO::FETCH_ASSOC);
 
     // AI Generated Review as needed.
-    $review = $this->generateReview($movie['Title'],$average);
-      
+    $review = $this->generateMovieReview($movie['Title'],$average);
+
+    require_once 'app/views/home/movie.php';
+    
     echo "<pre>";
     print_r ($movie);
     die;
