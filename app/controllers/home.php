@@ -6,10 +6,8 @@ class Home extends Controller {
       $user = $this->model('User');
       $data = $user->test();
 
-      $this->view('home/index');
-        die;
-      }
-
+      $this->view('home/index', $data);
+    }
       private function generateMovieReview($movie, $average){
         $api_key = $_ENV['Gemini'];
         $url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=".$_ENV['Gemini'];
@@ -67,4 +65,5 @@ class Home extends Controller {
     $response_data = $json_decode($response, true);
     return $response['candidates'][0]['content']['parts'][0]['text'] ?? 'No review available.';
   }
+  
 }
