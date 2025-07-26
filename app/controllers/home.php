@@ -1,7 +1,7 @@
 <?php
 
 class Home extends Controller {
-
+  // check all tabs at least once when running the program.
     public function index() {
       $user = $this->model('User');
       $data = $user->test();

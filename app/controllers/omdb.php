@@ -2,7 +2,14 @@
 
 class omdb extends Controller {
   public function index() {
+    $queryUrl = "http://www.omdbapi.com/?apikey=".$_ENV['omdb_key']."&t=The Matrix";
+    $json = file_get_contents($queryUrl);
+    $phpObj = json_decode($json);
+    $movie = (array) $phpObj;
 
+    echo "<pre>";
+    print_r ($movie);
+    die;
   }
   public function search(){ 
     if (isset($_GET['title']) || empty(trim($_GET['title']))){
