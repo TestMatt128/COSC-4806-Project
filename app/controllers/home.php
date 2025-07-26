@@ -26,24 +26,36 @@ class Home extends Controller {
         )
       );
 
-      $json_data = json_encode($data);
       $ch = curl_init($url);
-      curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
-      curl_setopt($ch, CURLOPT_POSTFIELDS, $json_data);
       curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-      curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+      curl_setopt($ch, CURLOPT_POSTFIELDS, $json_encode($data));
+      curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json', 'X-Goog-Api-Key:'.$api_key));
+        
       $response = curl_exec($ch);
       curl_close($ch);
       if(curl_close($ch)){
         echo 'Curl Error.'. curl_error($ch);
       }
       $response_data = json_decode($response, true);
-      echo "<pre>";
-      echo $response_data['candidates'][0]['content']['parts'][0]['text'];
-      die;
 
+      return $response_data['candidates'][0]['content']['parts'][0]['text'] ?? 'No review available.';
     }
+  
   private function generateUserReview($movie, $average) {
+    $api_key = $_ENV['Gemini'];
+    $url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=".$_ENV['Gemini'];
+
+    $data = array(
+      "contents" => array(
+        array(
+          "parts" => array(
+            array(
+              "text" => 'What is your opinion on the movie '.$movie.'? Please write your review and also the '.$average.' rating of the movie out of 10 stars.'
+            )
+          )
+        )
+      )
+    );
     
   }
 }
