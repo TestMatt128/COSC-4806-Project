@@ -1,11 +1,11 @@
 <?php
 
-class movie {
+class Movie extends Controller {
   public function index() {
     $this->view('movie/index');
   }
   public function search() {
-    if(!isset($_REQUEST['movie']){
+    if(!isset($_REQUEST['movie'])){
        // if search is empty, return to movie page.
       die("Movie not found.");
       header('Location: /movie');
