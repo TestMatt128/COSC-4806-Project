@@ -27,6 +27,9 @@ class movie {
     $db = db_connect();
     
   }
+  public function generateMovieReview($title, $average){
+    $url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=".$_ENV['Gemini'];
+  }
 }
 
 ?>

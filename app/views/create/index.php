@@ -29,5 +29,5 @@
             </form>
         </div>
     </div>
-    <?php require_once 'app/views/templates/footer.php'; ?>
 </main>
+<?php require_once 'app/views/templates/footer.php'; ?>

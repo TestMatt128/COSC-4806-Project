@@ -28,7 +28,6 @@
 			<a href="/create">
 				<button type="submit" class="btn btn-success">Sign Up</button>
 			</a>
-		</p>
 	</div>
 </div>
     <?php require_once 'app/views/templates/footer.php' ?>
