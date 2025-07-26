@@ -20,8 +20,8 @@ class Movie extends Controller {
 
     if (!object || $object->Response == "False"){
       die("Movie not found.");
-    }
-    $movie = (array) $object);
+    } 
+    $title = (array) $object;
 
     require_once 'app/database.php';
     $db = db_connect();
