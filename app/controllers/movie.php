@@ -27,7 +27,10 @@ class Movie extends Controller {
     $db = db_connect();
     
   }
-  public function generateMovieReview($title, $average){
+  public function generateMovieReview($movie, $average){
+    $url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=".$_ENV['Gemini'];
+  }
+  public function generateUserReview($movie, $rating){
     $url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=".$_ENV['Gemini'];
   }
 }
