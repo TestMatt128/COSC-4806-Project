@@ -29,7 +29,7 @@ class Home extends Controller {
       $ch = curl_init($url);
       curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
       curl_setopt($ch, CURLOPT_POSTFIELDS, $json_encode($data));
-      curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json', 'X-Goog-Api-Key:'.$api_key));
+      curl_setopt($ch, CURLOPT_HTTPHEADER,['Content-Type: application/json', 'X-Goog-Api-Key:'.$api_key]);
         
       $response = curl_exec($ch);
       curl_close($ch);
@@ -41,7 +41,7 @@ class Home extends Controller {
       return $response_data['candidates'][0]['content']['parts'][0]['text'] ?? 'No review available.';
     }
   
-  private function generateUserReview($movie, $average) {
+  private function generateUserReview($movie, $rating) {
     $api_key = $_ENV['Gemini'];
     $url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=".$_ENV['Gemini'];
 
@@ -50,12 +50,21 @@ class Home extends Controller {
         array(
           "parts" => array(
             array(
-              "text" => 'What is your opinion on the movie '.$movie.'? Please write your review and also the '.$average.' rating of the movie out of 10 stars.'
+              "text" => 'What is your opinion on the movie '.$movie.'? Please write your review and also the '.$rating.' rating of the movie out of 10 stars.'
             )
           )
         )
       )
     );
-    
+    $ch = curl_init($url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $json_encode($data));
+    curl_setopt($ch, CURLOPT_HTTPHEADER,['Content-Type: application/json', 'X-Goog-Api-Key:'.$api_key]);
+
+    $response = curl_exec($ch);
+    curl_close($ch);
+
+    $response_data = $json_decode($response, true);
+    return $response['candidates'][0]['content']['parts'][0]['text'] ?? 'No review available.';
   }
 }
