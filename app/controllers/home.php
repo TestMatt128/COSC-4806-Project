@@ -6,14 +6,20 @@ class Home extends Controller {
       $user = $this->model('User');
       $data = $user->test();
 
-      $url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=".$_ENV['Gemini'];
+      $this->view('home/index');
+        die;
+      }
+
+      private function generateMovieReview($movie, $average){
+        $api_key = $_ENV['Gemini'];
+        $url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=".$_ENV['Gemini'];
 
       $data = array(
         "contents" => array(
           array(
             "parts" => array(
               array(
-                "text" => 'Please post a review for this movie, thank you.'
+                "text" => 'Please post a movie review for the movie '.$movie.' with an average rating of '.$average.' stars. Make sure to include a rating out of 10 stars as well as some overviews of them without resorting to AI generating texts.'
               )
             )
           )
@@ -36,8 +42,8 @@ class Home extends Controller {
       echo $response_data['candidates'][0]['content']['parts'][0]['text'];
       die;
 
-	    $this->view('home/index');
-	    die;
     }
-
+  private function generateUserReview($movie, $average) {
+    
+  }
 }
